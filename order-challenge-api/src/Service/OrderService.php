@@ -3,7 +3,7 @@ namespace App\Service;
 
 
 use App\Entity\Order;
-use App\Entity\OrderItemMap;
+use App\Entity\OrderItem;
 use Doctrine\ORM\EntityManager;
 
 class OrderService
@@ -28,7 +28,7 @@ class OrderService
     public function create(array $params): void
     {
         $order = new Order();
-        $customer = $this->entityManager->getRepository('App:Customers')->find($params['customer_id']);
+        $customer = $this->entityManager->getRepository('App:Customer')->find($params['customer_id']);
         $order->setCustomer($customer);
         $this->entityManager->persist($order);
         $this->entityManager->flush();
@@ -37,13 +37,13 @@ class OrderService
             $product = $this->entityManager->getRepository('App:Product')->find($item['id']);
             $totalPrice = $product->getPrice() * $item['quantity'];
             $total += $totalPrice;
-            $orderItemMap = new OrderItemMap();
-            $orderItemMap->setOrder($order);
-            $orderItemMap->setProduct($product);
-            $orderItemMap->setTotal($totalPrice);
-            $orderItemMap->setQuantity($item['quantity']);
+            $orderItem = new OrderItem();
+            $orderItem->setOrder($order);
+            $orderItem->setProduct($product);
+            $orderItem->setTotal($totalPrice);
+            $orderItem->setQuantity($item['quantity']);
             $product->setStock($product->getStock() - $item['quantity']);
-            $this->entityManager->persist($orderItemMap);
+            $this->entityManager->persist($orderItem);
         }
         $order->setTotal($total);
         $this->entityManager->flush();
@@ -56,6 +56,15 @@ class OrderService
     public function getOrderById(int $orderId): array {
         $order = $this->entityManager->getRepository('App:Order')->find($orderId);
         return $this->prepareOrderData($order);
+    }
+
+    /**
+     * @param int $orderId
+     */
+    public function deleteOrderById(int $orderId): void {
+        $order = $this->entityManager->getRepository('App:Order')->find($orderId);
+        $this->entityManager->remove($order);
+        $this->entityManager->flush();
     }
 
     /**

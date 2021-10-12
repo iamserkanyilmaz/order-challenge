@@ -59,4 +59,16 @@ class OrderController extends BaseController
         $orderService->create($postData);
         return $this->json(['message' => 'Order Created'], Response::HTTP_CREATED);
     }
+
+    /**
+     * @Route("/api/orders/{id}", name="orders_crate", methods={"DELETE"})
+     * @param Request $request
+     * @param OrderService $orderService
+     * @return JsonResponse
+     */
+    public function delete(Request $request, OrderService $orderService): JsonResponse
+    {
+        $orderService->deleteOrderById($request->get('id'));
+        return $this->json(['message' => 'Order Deleted'], Response::HTTP_OK);
+    }
 }

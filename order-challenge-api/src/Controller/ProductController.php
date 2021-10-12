@@ -56,7 +56,7 @@ class ProductController extends BaseController
         }
 
         $productService->create($postData);
-        return $this->json(['message' => 'Customer Created'], Response::HTTP_CREATED);
+        return $this->json(['message' => 'Product Created'], Response::HTTP_CREATED);
     }
 
     /**
@@ -79,6 +79,6 @@ class ProductController extends BaseController
         }
 
         $productService->updateStock($request->get('id'), $postData['stock']);
-        return $this->json(['message' => 'Product Updated'], Response::HTTP_OK);
+        return $this->json(['message' => 'Product Stock Updated'], Response::HTTP_OK);
     }
 }

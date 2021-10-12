@@ -2,8 +2,6 @@
 namespace App\Service;
 
 
-use App\Entity\Order;
-use App\Entity\OrderItemMap;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManager;
 

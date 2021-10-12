@@ -32,7 +32,7 @@ class Order
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="order", cascade={"remove"}, orphanRemoval=true)
      */
     private $items = [];
 

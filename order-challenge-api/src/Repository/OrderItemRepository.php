@@ -20,7 +20,7 @@ class OrderItemRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return OrderItemMap[] Returns an array of OrderItemMap objects
+    //  * @return OrderItem[] Returns an array of OrderItemMap objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class OrderItemRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?OrderItemMap
+    public function findOneBySomeField($value): ?OrderItem
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.exampleField = :val')

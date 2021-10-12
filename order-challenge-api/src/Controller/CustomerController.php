@@ -34,7 +34,7 @@ class CustomerController extends BaseController
     }
 
     /**
-     * @Route("/api/customers", name="customers_crate", methods={"POST"})
+     * @Route("/api/customers", name="customers_create", methods={"POST"})
      * @param Request $request
      * @param CustomerService $customerService
      * @return JsonResponse
